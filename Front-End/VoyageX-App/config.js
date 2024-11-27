@@ -1,0 +1,1 @@
+export const SERVER_IP = 'http://10.6.0.107:8000';
