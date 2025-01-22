@@ -15,6 +15,82 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { SERVER_IP } from '../config';
 
+
+const hardcodedRestaurants = [
+  {
+    id: 1,
+    nomRestaurant: "Dayou Pâtisserie",
+    adresse: "42 rue Bréguet, 75011, Paris",
+    typeCuisine: "Pâtisserie",
+    bio: "Pâtisserie française raffinée dans un cadre élégant.",
+    prixMoyen: 20,
+    image: "https://www.le-bistro-restaurant-cassis.com/websites/3bea309896e4c43398fffa3adbc980bc/img/photo11_20210215150112.jpg",
+    latitude: 48.8566,
+    longitude: 2.3522,
+    promoteurId: 1
+  },
+  {
+    id: 2,
+    nomRestaurant: "Marvelli",
+    adresse: "56 Rue de Rivoli, 75004, Paris",
+    typeCuisine: "Italien",
+    bio: "Restaurant offrant une vue imprenable sur la ville.",
+    prixMoyen: 30,
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/01/88/b0/07/salle-du-restaurant-pic.jpg",
+    latitude: 48.8566,
+    longitude: 2.3522,
+    promoteurId: 2
+  },
+  {
+    id: 3,
+    nomRestaurant: "Jaipur Café",
+    adresse: "12 Rue de la République, 75001, Paris",
+    typeCuisine: "Indien",
+    bio: "Restaurant chaleureux avec cuisine traditionnelle indienne.",
+    prixMoyen: 25,
+    image: "https://www.myboutiquehotel.com/photos/6918/maison-dhotes-du-cote-de-chez-anne-strasbourg-048-61467-1110x700.jpg",
+    latitude: 48.8566,
+    longitude: 2.3522,
+    promoteurId: 3
+  },
+  {
+    id: 4,
+    nomRestaurant: "Sixta",
+    adresse: "42 Rue de Bayard, 31000 Toulouse",
+    typeCuisine: "Végétarien",
+    bio: "Sixta est un restaurant végétarien.",
+    prixMoyen: 15,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrFYTub1yNs6VsHlB2dHkpsKomt_-EvajLW_RSYLqWhw&s",
+    latitude: 43.6045,
+    longitude: 1.444,
+    promoteurId: 4
+  },
+  {
+    id: 5,
+    nomRestaurant: "Baba",
+    adresse: "34 Avenue des Champs-Élysées, 75008, Paris",
+    typeCuisine: "Français",
+    bio: "Baba convivial proposant une cuisine variée et de qualité.",
+    prixMoyen: 35,
+    image: "https://images.squarespace-cdn.com/content/v1/5f631fe01807e96e3404bd87/1643729887323-RE9D7AA7YM67JITBK9QB/IMG-20220125-WA0054.jpg",
+    latitude: 48.8566,
+    longitude: 2.3522,
+    promoteurId: 5
+  },
+  {
+    id: 6,
+    nomRestaurant: "Chikinmos",
+    adresse: "Calle del General Díaz Porlier, 38, Bajo Local, Salamanca, 28001 Madrid, Espagne",
+    typeCuisine: "Coréen",
+    bio: "Cuisine à base de Tapas Coréen.",
+    prixMoyen: 20,
+    image: "https://lh5.googleusercontent.com/p/AF1QipN0KAD2RdPgtfxXs52Vl4R_tTA_aQRvj-rO211N=w426-h240-k-no",
+    latitude: 40.4168,
+    longitude: -3.7038,
+    promoteurId: 6
+  }
+];
+
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [restaurants, setRestaurants] = useState([]);
@@ -26,22 +102,27 @@ const SearchScreen = () => {
   const mapRef = useRef(null);
   const scrollViewRef = useRef(null);
 
+  // useEffect(() => {
+  //   const fetchRestaurantsAndActivites = async () => {
+  //     try {
+  //       const restaurantsResponse = await axios.get(`${SERVER_IP}/v1/restaurant`, { timeout: 5000 });
+  //       setRestaurants(restaurantsResponse.data);
+  //       setFilteredRestaurants(restaurantsResponse.data);
+
+  //       const activitesResponse = await axios.get(`${SERVER_IP}/v1/activite`, { timeout: 5000 });
+  //       setActivites(activitesResponse.data);
+  //       setFilteredActivites(activitesResponse.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchRestaurantsAndActivites();
+  // }, []);
+
   useEffect(() => {
-    const fetchRestaurantsAndActivites = async () => {
-      try {
-        const restaurantsResponse = await axios.get(`${SERVER_IP}/v1/restaurant`, { timeout: 5000 });
-        setRestaurants(restaurantsResponse.data);
-        setFilteredRestaurants(restaurantsResponse.data);
-
-        const activitesResponse = await axios.get(`${SERVER_IP}/v1/activite`, { timeout: 5000 });
-        setActivites(activitesResponse.data);
-        setFilteredActivites(activitesResponse.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchRestaurantsAndActivites();
+    setRestaurants(hardcodedRestaurants);
+    setFilteredRestaurants(hardcodedRestaurants);
   }, []);
 
   useEffect(() => {
